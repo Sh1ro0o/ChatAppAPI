@@ -3,6 +3,6 @@
     public interface IChatService
     {
         Task CreateLobby(string connectionId);
-        Task JoinLobby(string connectionId);
+        Task JoinLobby(string connectionId, string groupNameGUID);
     }
 }

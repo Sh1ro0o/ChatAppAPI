@@ -17,9 +17,9 @@ namespace ChatAppAPI.Hubs
             await _chatService.CreateLobby(Context.ConnectionId);
         }
 
-        public async Task JoinLobby()
+        public async Task JoinLobby(string groupNameGUID)
         {
-            await _chatService.JoinLobby(Context.ConnectionId);
+            await _chatService.JoinLobby(Context.ConnectionId, groupNameGUID);
         }
 
         public async Task SendMessage(MessageDto message)
