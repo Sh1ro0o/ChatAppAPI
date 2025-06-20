@@ -1,4 +1,5 @@
-﻿using ChatAppAPI.Hubs;
+﻿using ChatAppAPI.Common.ErrorHandling;
+using ChatAppAPI.Hubs;
 using ChatAppAPI.Interface;
 using Microsoft.AspNetCore.SignalR;
 using System.Collections.Concurrent;
@@ -10,43 +11,51 @@ namespace ChatAppAPI.Services
     public class ChatService : IChatService
     {
         private readonly IHubContext<ChatHub> _hubContext;
+        private readonly IRoomStoreService _roomStoreService;
 
-        //local room storage for temporary rooms
-        private ConcurrentQueue<string> knownRooms = new();
-
-        public ChatService(IHubContext<ChatHub> hubContext)
+        public ChatService(IHubContext<ChatHub> hubContext, IRoomStoreService roomStoreService)
         {
             _hubContext = hubContext;
+            _roomStoreService = roomStoreService;
         }
 
-        public async Task CreateLobby(string connectionId)
+        public async Task<OperationResult> CreateRoom(string connectionId)
         {
             string groupNameGUID = Guid.NewGuid().ToString();
 
             try
             {
                 await _hubContext.Groups.AddToGroupAsync(connectionId, groupNameGUID);
-                knownRooms.Enqueue(groupNameGUID);
+                _roomStoreService.AddToRoom(connectionId, groupNameGUID);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error creating to group: {ex.Message}");
+                return OperationResult.Failure($"Error creating to group: {ex.Message}");
             }
+
+            return OperationResult<string>.Success(groupNameGUID);
         }
 
-        public async Task JoinLobby(string connectionId, string groupNameGUID)
+        public async Task<OperationResult> JoinRoom(string connectionId, string groupNameGUID)
         {
-            if (knownRooms.Contains(groupNameGUID))
+            if (_roomStoreService.RoomExists(groupNameGUID))
             {
                 try
                 {
                     await _hubContext.Groups.AddToGroupAsync(connectionId, groupNameGUID);
+                    _roomStoreService.AddToRoom(connectionId, groupNameGUID);
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Error joining to group: {ex.Message}");
+                    return OperationResult.Failure($"Error joining to Room: {ex.Message}");
                 }
             }
+            else
+            {
+                return OperationResult.Failure($"Error joining to Room");
+            }
+
+            return OperationResult<string>.Success(groupNameGUID);
         }
     }
 }

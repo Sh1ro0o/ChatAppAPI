@@ -1,8 +1,10 @@
-﻿namespace ChatAppAPI.Interface
+﻿using ChatAppAPI.Common.ErrorHandling;
+
+namespace ChatAppAPI.Interface
 {
     public interface IChatService
     {
-        Task CreateLobby(string connectionId);
-        Task JoinLobby(string connectionId, string groupNameGUID);
+        Task<OperationResult> CreateRoom(string connectionId);
+        Task<OperationResult> JoinRoom(string connectionId, string groupNameGUID);
     }
 }
