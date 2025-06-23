@@ -38,24 +38,27 @@ namespace ChatAppAPI.Services
 
         public async Task<OperationResult> JoinRoom(string connectionId, string groupNameGUID)
         {
-            if (_roomStoreService.RoomExists(groupNameGUID))
-            {
-                try
-                {
-                    await _hubContext.Groups.AddToGroupAsync(connectionId, groupNameGUID);
-                    _roomStoreService.AddToRoom(connectionId, groupNameGUID);
-                }
-                catch (Exception ex)
-                {
-                    return OperationResult.Failure($"Error joining to Room: {ex.Message}");
-                }
-            }
-            else
+            if (!_roomStoreService.RoomExists(groupNameGUID))
             {
                 return OperationResult.Failure($"Error joining to Room");
             }
 
-            return OperationResult<string>.Success(groupNameGUID);
+            if (_roomStoreService.UserInRoomExists(connectionId, groupNameGUID))
+            {
+                return OperationResult<string>.Success(groupNameGUID);
+            }
+
+            try
+            {
+                await _hubContext.Groups.AddToGroupAsync(connectionId, groupNameGUID);
+                _roomStoreService.AddToRoom(connectionId, groupNameGUID);
+
+                return OperationResult<string>.Success(groupNameGUID);
+            }
+            catch (Exception ex)
+            {
+                return OperationResult.Failure($"Error joining to Room: {ex.Message}");
+            }
         }
     }
 }

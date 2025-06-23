@@ -5,11 +5,17 @@ namespace ChatAppAPI.Services
 {
     public class RoomStoreService : IRoomStoreService
     {
+        //Key - connectionId, Value - roomName
         private ConcurrentDictionary<string, string> Rooms = new ConcurrentDictionary<string, string>();
 
         public bool RoomExists(string roomName)
         {
             return Rooms.Any(x => x.Value == roomName);
+        }
+
+        public bool UserInRoomExists(string connectionId, string roomName)
+        {
+            return Rooms.Any(x => x.Key == connectionId && x.Value == roomName);
         }
 
         public bool AddToRoom(string connectionId, string roomName)
