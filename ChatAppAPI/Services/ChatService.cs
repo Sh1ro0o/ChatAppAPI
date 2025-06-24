@@ -1,6 +1,9 @@
 ﻿using ChatAppAPI.Common.ErrorHandling;
+using ChatAppAPI.Dto;
 using ChatAppAPI.Hubs;
 using ChatAppAPI.Interface;
+using ChatAppAPI.Mappers;
+using ChatAppAPI.Requests;
 using Microsoft.AspNetCore.SignalR;
 using System.Collections.Concurrent;
 using System.Text.RegularExpressions;
@@ -10,10 +13,10 @@ namespace ChatAppAPI.Services
 {
     public class ChatService : IChatService
     {
-        private readonly IHubContext<ChatHub> _hubContext;
+        private readonly IHubContext<ChatHub, IChatClient> _hubContext;
         private readonly IRoomStoreService _roomStoreService;
 
-        public ChatService(IHubContext<ChatHub> hubContext, IRoomStoreService roomStoreService)
+        public ChatService(IHubContext<ChatHub, IChatClient> hubContext, IRoomStoreService roomStoreService)
         {
             _hubContext = hubContext;
             _roomStoreService = roomStoreService;
@@ -59,6 +62,13 @@ namespace ChatAppAPI.Services
             {
                 return OperationResult.Failure($"Error joining to Room: {ex.Message}");
             }
+        }
+
+        public async Task SendMessage(string connectionId, MessageRequest message)
+        {
+            var messageDto = message.ToMessageDto();
+
+            await _hubContext.Clients.GroupExcept(message.GroupName, connectionId).ReceiveMessage(messageDto);
         }
     }
 }

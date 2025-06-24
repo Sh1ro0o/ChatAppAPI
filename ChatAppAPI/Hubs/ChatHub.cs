@@ -1,6 +1,7 @@
 ﻿using ChatAppAPI.Common.ErrorHandling;
 using ChatAppAPI.Dto;
 using ChatAppAPI.Interface;
+using ChatAppAPI.Requests;
 using Microsoft.AspNetCore.SignalR;
 
 namespace ChatAppAPI.Hubs
@@ -23,9 +24,9 @@ namespace ChatAppAPI.Hubs
             return await _chatService.JoinRoom(Context.ConnectionId, groupNameGUID);
         }
 
-        public async Task SendMessage(MessageDto message)
+        public async Task SendMessage(MessageRequest message)
         {
-            await Clients.Group(message.GroupId).ReceiveMessage(message);
+            await _chatService.SendMessage(Context.ConnectionId, message);
         }
     }
 }
