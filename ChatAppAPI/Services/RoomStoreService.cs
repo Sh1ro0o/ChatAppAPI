@@ -25,15 +25,20 @@ namespace ChatAppAPI.Services
             return result;
         }
 
-        public bool RemoveFromRoom(string connectionId, string roomName)
+        public bool RemoveFromRoom(string connectionId, string? roomName = null)
         {
             //If Room exists remove
-            if (Rooms.TryGetValue(connectionId, out var existingRoomName) && roomName == existingRoomName)
+            if (!Rooms.TryGetValue(connectionId, out var existingRoomName))
             {
-                return Rooms.TryRemove(connectionId, out _);
+                return false;
             }
 
-            return false;
+            if (roomName != null && roomName != existingRoomName)
+            {
+                return false;
+            }
+
+            return Rooms.TryRemove(connectionId, out _);
         }
     }
 }

@@ -24,9 +24,23 @@ namespace ChatAppAPI.Hubs
             return await _chatService.JoinRoom(Context.ConnectionId, groupNameGUID);
         }
 
-        public async Task SendMessage(MessageRequest message)
+        public OperationResult LeaveRoom()
         {
-            await _chatService.SendMessage(Context.ConnectionId, message);
+            return _chatService.LeaveRoom(Context.ConnectionId);
+        }
+
+
+        public async Task<OperationResult> SendMessage(MessageRequest message)
+        {
+            return await _chatService.SendMessage(Context.ConnectionId, message);
+        }
+
+        public override Task OnDisconnectedAsync(Exception? exception)
+        {
+            //Remove disconnected user from Chat room
+            _chatService.LeaveRoom(Context.ConnectionId);
+
+            return base.OnDisconnectedAsync(exception);
         }
     }
 }

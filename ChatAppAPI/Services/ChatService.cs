@@ -5,9 +5,6 @@ using ChatAppAPI.Interface;
 using ChatAppAPI.Mappers;
 using ChatAppAPI.Requests;
 using Microsoft.AspNetCore.SignalR;
-using System.Collections.Concurrent;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace ChatAppAPI.Services
 {
@@ -64,11 +61,31 @@ namespace ChatAppAPI.Services
             }
         }
 
-        public async Task SendMessage(string connectionId, MessageRequest message)
+        public OperationResult LeaveRoom(string connectionId)
+        {
+            var isRemoved = _roomStoreService.RemoveFromRoom(connectionId);
+
+            if (isRemoved)
+            {
+                return OperationResult<bool>.Success(isRemoved);
+            }
+
+            return OperationResult.Failure($"Error leaving Room");
+        }
+
+        public async Task<OperationResult> SendMessage(string connectionId, MessageRequest message)
         {
             var messageDto = message.ToMessageDto();
 
-            await _hubContext.Clients.GroupExcept(message.GroupName, connectionId).ReceiveMessage(messageDto);
+            try
+            {
+                await _hubContext.Clients.GroupExcept(message.GroupName, connectionId).ReceiveMessage(messageDto);
+                return OperationResult<bool>.Success(true);
+            }
+            catch (Exception ex)
+            {
+                return OperationResult.Failure($"Error sending a message");
+            }
         }
     }
 }

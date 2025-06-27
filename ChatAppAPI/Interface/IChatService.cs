@@ -8,6 +8,7 @@ namespace ChatAppAPI.Interface
     {
         Task<OperationResult> CreateRoom(string connectionId);
         Task<OperationResult> JoinRoom(string connectionId, string groupNameGUID);
-        Task SendMessage(string connectionId, MessageRequest message);
+        OperationResult LeaveRoom(string connectionId);
+        Task<OperationResult> SendMessage(string connectionId, MessageRequest message);
     }
 }
