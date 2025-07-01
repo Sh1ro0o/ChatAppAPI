@@ -87,5 +87,25 @@ namespace ChatAppAPI.Services
                 return OperationResult.Failure($"Error sending a message");
             }
         }
+
+        public async Task<OperationResult> NotifyUserJoined(string connectionId, UserJoinedRequest userJoinedRequest)
+        {
+            var username = userJoinedRequest.Username;
+            var messageDto = new MessageDto
+            {
+                Username = username,
+                Message = $"{username} has Joined!"
+            };
+
+            try
+            {
+                await _hubContext.Clients.GroupExcept(userJoinedRequest.GroupName, connectionId).UserJoined(messageDto);
+                return OperationResult<bool>.Success(true);
+            }
+            catch (Exception ex)
+            {
+                return OperationResult.Failure($"Error notifying a Username: {userJoinedRequest.Username} has joined");
+            }
+        }
     }
 }

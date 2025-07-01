@@ -29,10 +29,14 @@ namespace ChatAppAPI.Hubs
             return _chatService.LeaveRoom(Context.ConnectionId);
         }
 
-
         public async Task<OperationResult> SendMessage(MessageRequest message)
         {
             return await _chatService.SendMessage(Context.ConnectionId, message);
+        }
+
+        public async Task<OperationResult> NotifyUserJoined(UserJoinedRequest userJoinedRequest)
+        {
+            return await _chatService.NotifyUserJoined(Context.ConnectionId, userJoinedRequest);
         }
 
         public override Task OnDisconnectedAsync(Exception? exception)

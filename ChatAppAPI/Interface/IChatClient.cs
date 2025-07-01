@@ -5,5 +5,6 @@ namespace ChatAppAPI.Interface
     public interface IChatClient
     {
         Task ReceiveMessage(MessageDto message);
+        Task UserJoined(MessageDto message);
     }
 }

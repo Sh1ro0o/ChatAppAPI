@@ -10,5 +10,6 @@ namespace ChatAppAPI.Interface
         Task<OperationResult> JoinRoom(string connectionId, string groupNameGUID);
         OperationResult LeaveRoom(string connectionId);
         Task<OperationResult> SendMessage(string connectionId, MessageRequest message);
+        Task<OperationResult> NotifyUserJoined(string connectionId, UserJoinedRequest userJoinedRequest);
     }
 }
