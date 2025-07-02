@@ -34,11 +34,6 @@ namespace ChatAppAPI.Hubs
             return await _chatService.SendMessage(Context.ConnectionId, message);
         }
 
-        public async Task<OperationResult> NotifyUserJoined(UserJoinedRequest userJoinedRequest)
-        {
-            return await _chatService.NotifyUserJoined(Context.ConnectionId, userJoinedRequest);
-        }
-
         public override Task OnDisconnectedAsync(Exception? exception)
         {
             //Remove disconnected user from Chat room

@@ -11,6 +11,7 @@ namespace ChatAppAPI.Mappers
             {
                 Username = messageRequest.Username,
                 Message = messageRequest.Message,
+                Type = messageRequest.Type,
             };
         }
     }
