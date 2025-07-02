@@ -37,7 +37,7 @@ namespace ChatAppAPI.Hubs
         public override Task OnDisconnectedAsync(Exception? exception)
         {
             //Remove disconnected user from Chat room
-            _chatService.LeaveRoom(Context.ConnectionId);
+            _chatService.OnDisconnected(Context.ConnectionId);
 
             return base.OnDisconnectedAsync(exception);
         }

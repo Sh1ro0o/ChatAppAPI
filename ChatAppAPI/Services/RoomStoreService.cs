@@ -27,7 +27,7 @@ namespace ChatAppAPI.Services
 
         public bool RemoveFromRoom(string connectionId, string? roomName = null)
         {
-            //If Room exists remove
+            //If Room exists -> remove
             if (!Rooms.TryGetValue(connectionId, out var existingRoomName))
             {
                 return false;
@@ -39,6 +39,13 @@ namespace ChatAppAPI.Services
             }
 
             return Rooms.TryRemove(connectionId, out _);
+        }
+
+        public string? UsersCurrentRoomName(string connectionId)
+        {
+            Rooms.TryGetValue(connectionId, out var existingRoomName);
+
+            return existingRoomName;
         }
     }
 }

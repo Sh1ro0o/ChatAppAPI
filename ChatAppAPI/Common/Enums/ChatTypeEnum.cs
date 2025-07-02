@@ -6,10 +6,10 @@ namespace ChatAppAPI.Common.Enums
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum MessageType
     {
-        [EnumMember(Value = "system")]
+        [EnumMember(Value = "System")]
         System,
 
-        [EnumMember(Value = "user")]
+        [EnumMember(Value = "User")]
         User,
     }
 }

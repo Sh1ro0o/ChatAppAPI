@@ -6,5 +6,6 @@
         bool UserInRoomExists(string connectionId, string roomName);
         bool AddToRoom(string connectionId, string roomName);
         bool RemoveFromRoom(string connectionId, string? roomName = null);
+        string? UsersCurrentRoomName(string connectionId);
     }
 }
