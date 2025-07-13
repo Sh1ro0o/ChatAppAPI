@@ -2,13 +2,11 @@
 
 A real-time chat app built with **SignalR**, **.NET Core Web API**, and **Angular**. It features real-time messaging, dynamic theme switching, robust connection handling, and a responsive, modern UI.
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/7aa456a6-6b44-4d53-8ff1-854b6fe23ed4" alt="Chat Screenshot 1" width="80%" />
-</p>
+<img width="1578" height="963" alt="image" src="https://github.com/user-attachments/assets/e46c1a0c-c0fd-45e7-b21f-d86e84a99843" />
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/a0182472-0f80-4195-a84e-7a7e00a48bff" alt="Chat Screenshot 2" width="50%" />
-</p>
+
+<img width="1044" height="1178" alt="image" src="https://github.com/user-attachments/assets/38a9d809-b768-4adc-9366-ed4e41192362" />
+
 
 ---
 
@@ -54,17 +52,5 @@ A real-time chat app built with **SignalR**, **.NET Core Web API**, and **Angula
 
 - **Frontend (Angular)** → [ChatAppUI](https://github.com/Sh1ro0o/ChatAppUI)
 - **Backend (ASP.NET Core)** → [ChatAppAPI](https://github.com/Sh1ro0o/ChatAppAPI)
-
----
-
-## 📸 Screenshots
-
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/7aa456a6-6b44-4d53-8ff1-854b6fe23ed4" alt="Chat UI" width="80%" />
-</p>
-
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/a0182472-0f80-4195-a84e-7a7e00a48bff" alt="Theme Selection" width="50%" />
-</p>
 
 ---
