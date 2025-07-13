@@ -1,31 +1,43 @@
-Live Chat Application with SignalR, .NET & Angular
-This is a real-time chat application built using SignalR for seamless bidirectional communication, with a .NET Core Web API backend and an Angular frontend. It supports dynamic theme selection, robust connection management, and user-friendly chat display features.
+💬 Live Chat Application with SignalR, .NET & Angular
+This is a real-time chat application built using SignalR for seamless bidirectional communication, with a .NET Core Web API backend and an Angular frontend. It supports dynamic theme selection, robust connection management, and a user-friendly chat interface.
 
-<img width="1578" height="963" alt="image" src="https://github.com/user-attachments/assets/7aa456a6-6b44-4d53-8ff1-854b6fe23ed4" />
-<img width="1044" height="1178" alt="image" src="https://github.com/user-attachments/assets/a0182472-0f80-4195-a84e-7a7e00a48bff" />
+<p align="center"> <img src="https://github.com/user-attachments/assets/7aa456a6-6b44-4d53-8ff1-854b6fe23ed4" alt="Chat Screenshot 1" width="80%" /> </p> <p align="center"> <img src="https://github.com/user-attachments/assets/2760fb13-853d-49e4-af19-9c7c2e134d0d" alt="Chat Screenshot 2" width="50%" /> </p>
 
-Key Features
-Real-Time Messaging with SignalR
-Utilizes SignalR to provide instant message delivery and real-time UI updates between users.
+🚀 Key Features
+🟢 Real-Time Messaging with SignalR
+Instant message delivery using WebSockets via SignalR
 
-.NET Core Web API
-Handles authentication, message routing, and connection tracking, providing a scalable and secure backend.
+Real-time updates for seamless chat experience
 
-Angular Frontend
-Responsive, component-based UI with user-friendly interfaces for chat, notifications, and theme switching.
+🧩 .NET Core Web API
+Secure and scalable backend
 
-Theme Selection
-Offers multiple themes (light/dark) to enhance user experience, with persistent preferences.
+Handles authentication, message routing, and connection state
 
-Connection Management
-Detects and manages user online/offline status, handles reconnection logic gracefully, and updates the UI accordingly.
+🧑‍💻 Angular Frontend
+Responsive, modular UI
 
-User Interface
-Clean and modern design displaying active users, message history, timestamps, and typing indicators.
+User-friendly layout with chat history, typing indicators, and status display
 
-Tech Stack
-Frontend: Angular, TypeScript, Tailwind CSS (or other chosen styling frameworks)
+🎨 Theme Selection
+Light/Dark mode toggle
 
-Backend: .NET 7+, SignalR, Entity Framework Core
+Persistent theme preference across sessions
 
-Communication: WebSockets via SignalR for low-latency updates
+🔌 Connection Management
+Tracks online/offline status
+
+Graceful reconnection handling
+
+Live updates for user presence
+
+💻 User Interface
+Clean, modern design
+
+Displays active users, timestamps, and chat metadata
+
+🧱 Tech Stack
+Layer	Technologies
+Frontend	Angular, TypeScript, Tailwind CSS (optional)
+Backend	.NET 7+, SignalR, Entity Framework Core
+Protocol	WebSockets via SignalR
